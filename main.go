@@ -10,7 +10,7 @@ import (
 
 // Dog is a struct that contains the dog info.
 type Dog struct {
-	ID    uint32 `json:"id"`
+	ID    uint   `json:"id"`
 	Name  string `json:"name"`
 	Breed string `json:"breed"`
 	Age   uint   `json:"age"`
@@ -58,7 +58,7 @@ var rootQuery = graphql.NewObject(graphql.ObjectConfig{
 			},
 			Resolve: func(params graphql.ResolveParams) (interface{}, error) {
 
-				idQuery, isOK := params.Args["id"]
+				idQuery, isOK := params.Args["id"].(uint)
 
 				if isOK {
 					for _, dog := range Dogs {
@@ -105,8 +105,9 @@ func main() {
 	})
 
 	fmt.Println("The server is running on port: 8000")
-	fmt.Println("Get single dog: curl -g 'http://localhost:8000/graphql?query={dog(id:\"b\"){id,text,done}}'")
-	fmt.Println("Access the web app via browser at 'http://localhost:8000'")
+	fmt.Println("Get single dog: curl -g 'http://localhost:8000/graphql?query={dog(id:1){id,name,breed,age}}'")
+	fmt.Println("Get all dogs: curl -g 'http://localhost:8000/graphql?query={list{id, name, breed, age}}'")
+	fmt.Println("Access the web app via browser at 'http://localhost:8000/graphql'")
 
 	http.ListenAndServe(":8000", nil)
 }

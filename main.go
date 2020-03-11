@@ -10,10 +10,10 @@ import (
 
 // Dog is a struct that contains the dog info.
 type Dog struct {
-	ID    uint   `json:"id"`
+	ID    int    `json:"id"`
 	Name  string `json:"name"`
 	Breed string `json:"breed"`
-	Age   uint   `json:"age"`
+	Age   int    `json:"age"`
 }
 
 // Dogs is an array of dogs.
@@ -58,7 +58,7 @@ var rootQuery = graphql.NewObject(graphql.ObjectConfig{
 			},
 			Resolve: func(params graphql.ResolveParams) (interface{}, error) {
 
-				idQuery, isOK := params.Args["id"].(uint)
+				idQuery, isOK := params.Args["id"].(int)
 
 				if isOK {
 					for _, dog := range Dogs {

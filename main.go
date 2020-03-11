@@ -45,7 +45,7 @@ var dogType = graphql.NewObject(graphql.ObjectConfig{
 })
 
 var rootQuery = graphql.NewObject(graphql.ObjectConfig{
-	Name: "RootQuery",
+	Name: "Query",
 	Fields: graphql.Fields{
 
 		"dog": &graphql.Field{
@@ -72,7 +72,7 @@ var rootQuery = graphql.NewObject(graphql.ObjectConfig{
 			},
 		},
 
-		"dogList": &graphql.Field{
+		"list": &graphql.Field{
 			Type:        graphql.NewList(dogType),
 			Description: "List of dogs",
 			Resolve: func(p graphql.ResolveParams) (interface{}, error) {
